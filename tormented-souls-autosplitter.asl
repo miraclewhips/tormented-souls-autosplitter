@@ -1,6 +1,6 @@
 state("TormentedSouls")
 {
-	float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
+	// float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
 
 	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA0;
 	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xB8;
@@ -315,11 +315,63 @@ startup
 	settings.Add("Bunker_3C-Bunker_3A", true, "Bunker 2C → Bunker 2A");
 
 	settings.CurrentDefaultParent = null;
+
+	// vars.Dbg = (Action<dynamic>) ((output) => print("[TORMENTED SOULS] " + output));
+}
+
+init
+{
+	vars.CancelSource = new CancellationTokenSource();
+	vars.ScanThread = new Thread(() =>
+	{
+		// vars.Dbg("Starting scan thread.");
+
+		var sceneManagerTrg = new SigScanTarget(3, "48 8B 1D ???????? 0F 57 C0")
+		{ OnFound = (p, s, ptr) => ptr + 0x4 + p.ReadValue<int>(ptr) };
+		var sceneManager = IntPtr.Zero;
+
+		var token = vars.CancelSource.Token;
+		while (!token.IsCancellationRequested)
+		{
+			var unityPlayer = game.ModulesWow64Safe().FirstOrDefault(m => m.ModuleName == "UnityPlayer.dll");
+			if (unityPlayer == null)
+			{
+				// vars.Dbg("UnityPlayer not yet initialized.");
+				Thread.Sleep(2000);
+			}
+
+			var scanner = new SignatureScanner(game, unityPlayer.BaseAddress, unityPlayer.ModuleMemorySize);
+
+			if (sceneManager == IntPtr.Zero && (sceneManager = scanner.Scan(sceneManagerTrg)) != IntPtr.Zero)
+				// vars.Dbg("Found SceneManager at 0x" + sceneManager.ToString("X"));
+
+			if (new[] { sceneManager }.All(ptr => ptr != IntPtr.Zero))
+			{
+				vars.LoadState = new MemoryWatcher<int>(new DeepPointer(sceneManager, 0x18));
+
+				// vars.Dbg("Initiating watchers completed.");
+				break;
+			}
+
+			// vars.Dbg("One or more signatures could not be found.");
+			Thread.Sleep(2000);
+		}
+
+		// vars.Dbg("Exiting scan thread.");
+	});
+
+	vars.ScanThread.Start();
 }
 
 start
 {
 	return current.room == "IntroScene";
+}
+
+update
+{
+	if (vars.ScanThread.IsAlive) return false;
+	vars.LoadState.Update(game);
 }
 
 split
@@ -361,12 +413,27 @@ reset
 	}
 }
 
-isLoading
+exit
 {
-	return true;
+	vars.CancelSource.Cancel();
 }
 
-gameTime
+shutdown
 {
-	return TimeSpan.FromSeconds(current.time);
+	vars.CancelSource.Cancel();
 }
+
+isLoading
+{
+	return vars.LoadState.Current > 2;
+}
+
+// isLoading
+// {
+// 	return true;
+// }
+
+// gameTime
+// {
+// 	return TimeSpan.FromSeconds(current.time);
+// }
