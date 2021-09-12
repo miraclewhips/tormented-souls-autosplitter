@@ -389,7 +389,7 @@ split
 		}
 	}else{
 		/* generator toggled */
-		if(current.generator != old.generator) {
+		if(current.generator != old.generator && current.room == "GeneratorRoom" && vars.LoadState.Current < 3) {
 			return settings["Generator"];
 		}
 
@@ -399,7 +399,7 @@ split
 		}
 
 		/* lamp obtained */
-		if(current.lamp > old.lamp) {
+		if(current.lamp > old.lamp && current.room == "Room_2B") {
 			return settings["Lamp"];
 		}
 	}
