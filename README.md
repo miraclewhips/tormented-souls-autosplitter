@@ -1,6 +1,6 @@
 # Tormented Souls AutoSplitter
 
-### [CLICK HERE TO DOWNLOAD](https://github.com/miraclewhips/tormented-souls-autosplitter/archive/refs/tags/tormented-souls-autosplitter.zip)
+### [CLICK HERE TO DOWNLOAD](https://github.com/miraclewhips/tormented-souls-autosplitter/archive/refs/tags/v1.1.0.zip)
 
 To enable the auto-splitter, edit layout and add *Control > Scriptable Autosplitter*.
 
