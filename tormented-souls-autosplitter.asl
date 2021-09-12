@@ -238,7 +238,7 @@ startup
 
 	/* Floor 1 East */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_Floor1East", true, "Floor1East");
+	settings.Add("RoomDoorCat_Floor1East", true, "Floor 1 East");
 	settings.CurrentDefaultParent = "RoomDoorCat_Floor1East";
 
 	settings.Add("Bathroom_A-Corridor_1C", true, "Private Restroom → East Wing Corridor");
@@ -250,7 +250,7 @@ startup
 
 	/* Floor 1 West */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_Floor1West", true, "Floor1West");
+	settings.Add("RoomDoorCat_Floor1West", true, "Floor 1 West");
 	settings.CurrentDefaultParent = "RoomDoorCat_Floor1West";
 
 	settings.Add("Kitchen-GarbageRoom", true, "Kitchen → Warehouse");
@@ -263,18 +263,18 @@ startup
 
 	/* Floor 2 East */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_Floor2East", true, "Floor2East");
+	settings.Add("RoomDoorCat_Floor2East", true, "Floor 2 East");
 	settings.CurrentDefaultParent = "RoomDoorCat_Floor2East";
 
 	settings.Add("ChildRoom-Corridor_2F", true, "Children's Room → Penthouse");
 
 	/* Floor 2 West */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_Floor2West", true, "Floor2West");
+	settings.Add("RoomDoorCat_Floor2West", true, "Floor 2 West");
 	settings.CurrentDefaultParent = "RoomDoorCat_Floor2West";
 
 	settings.Add("Reception-BigHall", true, "Reception → Main Hall");
-	settings.Add("Corridor_2A-Corridor_1B", true, "West Wing Corridor → Chapel");
+	settings.Add("Corridor_2A-Corridor_1B", true, "West Wing Corridor → Chapel (Elevator Down)");
 	settings.Add("Room_2D-Bathroom_D_M", true, "Room 2D (Mirror) → Bathroom 2C-2D (Mirror)");
 	settings.Add("Room_2D-Corridor_2E", true, "Room 2D → Intensive Care Corridor");
 
@@ -301,14 +301,14 @@ startup
 	
 	/* Bunker L1 */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_BunkerL1", true, "BunkerL1");
+	settings.Add("RoomDoorCat_BunkerL1", true, "Bunker L1");
 	settings.CurrentDefaultParent = "RoomDoorCat_BunkerL1";
 
 	settings.Add("Bunker_2A-Bunker_2B", true, "Bunker 1A → Bunker 1-2B");
 	
 	/* Bunker L2 */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
-	settings.Add("RoomDoorCat_BunkerL2", true, "BunkerL2");
+	settings.Add("RoomDoorCat_BunkerL2", true, "Bunker L2");
 	settings.CurrentDefaultParent = "RoomDoorCat_BunkerL2";
 
 	settings.Add("Bunker_2B-Bunker_3A", true, "Bunker 1-2B → Bunker 2A");
