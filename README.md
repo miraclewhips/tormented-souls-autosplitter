@@ -4,7 +4,7 @@
 
 To enable the auto-splitter, edit layout and add *Control > Scriptable Autosplitter*.
 
-If it's not showing the in-game-timer for you, make sure to right click LiveSplit and enable *Compare Against > Game Time*, and that your layout timers are also using Game Time.
+If it's not showing the correct time (loads removed) for you, make sure to right click LiveSplit and enable *Compare Against > Game Time*, and that your layout timers are also using Game Time.
 
 There are a lot of different auto-split options to choose from in the settings:
 
