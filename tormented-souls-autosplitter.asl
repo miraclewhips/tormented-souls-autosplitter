@@ -1,6 +1,6 @@
 state("TormentedSouls")
 {
-	// float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
+	float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
 
 	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA0;
 	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xB8;
@@ -12,6 +12,8 @@ state("TormentedSouls")
 
 startup
 {
+	settings.Add("UseIGT", true, "Use In-Game Timer value for timer");
+
 	/* Specific events */
 	settings.Add("Events", true, "Events");
 	settings.CurrentDefaultParent = "Events";
@@ -425,15 +427,16 @@ shutdown
 
 isLoading
 {
-	return vars.LoadState.Current > 2;
+	if(settings["UseIGT"]) {
+		return true;
+	}else{
+		return vars.LoadState.Current > 2;
+	}
 }
 
-// isLoading
-// {
-// 	return true;
-// }
-
-// gameTime
-// {
-// 	return TimeSpan.FromSeconds(current.time);
-// }
+gameTime
+{
+	if(settings["UseIGT"]) {
+		return TimeSpan.FromSeconds(current.time);
+	}
+}
