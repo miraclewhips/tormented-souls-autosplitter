@@ -8,6 +8,7 @@ state("TormentedSouls")
 	
 	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0x48, 0x14;
 	string255 room :  "UnityPlayer.dll", 0x19FE860, 0x48, 0x40;
+	int loadState : "UnityPlayer.dll", 0x19FE860, 0x18;
 }
 
 startup
@@ -319,60 +320,60 @@ startup
 	// vars.Dbg = (Action<dynamic>) ((output) => print("[TORMENTED SOULS] " + output));
 }
 
-init
-{
-	vars.CancelSource = new CancellationTokenSource();
-	vars.ScanThread = new Thread(() =>
-	{
-		// vars.Dbg("Starting scan thread.");
+// init
+// {
+// 	vars.CancelSource = new CancellationTokenSource();
+// 	vars.ScanThread = new Thread(() =>
+// 	{
+// 		// vars.Dbg("Starting scan thread.");
 
-		var sceneManagerTrg = new SigScanTarget(3, "48 8B 1D ???????? 0F 57 C0")
-		{ OnFound = (p, s, ptr) => ptr + 0x4 + p.ReadValue<int>(ptr) };
-		var sceneManager = IntPtr.Zero;
+// 		var sceneManagerTrg = new SigScanTarget(3, "48 8B 1D ???????? 0F 57 C0")
+// 		{ OnFound = (p, s, ptr) => ptr + 0x4 + p.ReadValue<int>(ptr) };
+// 		var sceneManager = IntPtr.Zero;
 
-		var token = vars.CancelSource.Token;
-		while (!token.IsCancellationRequested)
-		{
-			var unityPlayer = game.ModulesWow64Safe().FirstOrDefault(m => m.ModuleName == "UnityPlayer.dll");
-			if (unityPlayer == null)
-			{
-				// vars.Dbg("UnityPlayer not yet initialized.");
-				Thread.Sleep(2000);
-			}
+// 		var token = vars.CancelSource.Token;
+// 		while (!token.IsCancellationRequested)
+// 		{
+// 			var unityPlayer = game.ModulesWow64Safe().FirstOrDefault(m => m.ModuleName == "UnityPlayer.dll");
+// 			if (unityPlayer == null)
+// 			{
+// 				// vars.Dbg("UnityPlayer not yet initialized.");
+// 				Thread.Sleep(2000);
+// 			}
 
-			var scanner = new SignatureScanner(game, unityPlayer.BaseAddress, unityPlayer.ModuleMemorySize);
+// 			var scanner = new SignatureScanner(game, unityPlayer.BaseAddress, unityPlayer.ModuleMemorySize);
 
-			if (sceneManager == IntPtr.Zero && (sceneManager = scanner.Scan(sceneManagerTrg)) != IntPtr.Zero)
-				// vars.Dbg("Found SceneManager at 0x" + sceneManager.ToString("X"));
+// 			if (sceneManager == IntPtr.Zero && (sceneManager = scanner.Scan(sceneManagerTrg)) != IntPtr.Zero)
+// 				// vars.Dbg("Found SceneManager at 0x" + sceneManager.ToString("X"));
 
-			if (new[] { sceneManager }.All(ptr => ptr != IntPtr.Zero))
-			{
-				vars.LoadState = new MemoryWatcher<int>(new DeepPointer(sceneManager, 0x18));
+// 			if (new[] { sceneManager }.All(ptr => ptr != IntPtr.Zero))
+// 			{
+// 				vars.LoadState = new MemoryWatcher<int>(new DeepPointer(sceneManager, 0x18));
 
-				// vars.Dbg("Initiating watchers completed.");
-				break;
-			}
+// 				// vars.Dbg("Initiating watchers completed.");
+// 				break;
+// 			}
 
-			// vars.Dbg("One or more signatures could not be found.");
-			Thread.Sleep(2000);
-		}
+// 			// vars.Dbg("One or more signatures could not be found.");
+// 			Thread.Sleep(2000);
+// 		}
 
-		// vars.Dbg("Exiting scan thread.");
-	});
+// 		// vars.Dbg("Exiting scan thread.");
+// 	});
 
-	vars.ScanThread.Start();
-}
+// 	vars.ScanThread.Start();
+// }
 
 start
 {
 	return current.room == "IntroScene";
 }
 
-update
-{
-	if (vars.ScanThread.IsAlive) return false;
-	vars.LoadState.Update(game);
-}
+// update
+// {
+// 	if (vars.ScanThread.IsAlive) return false;
+// 	vars.LoadState.Update(game);
+// }
 
 split
 {
@@ -389,7 +390,7 @@ split
 		}
 	}else{
 		/* generator toggled */
-		if(current.generator != old.generator && current.room == "GeneratorRoom" && vars.LoadState.Current < 3) {
+		if(current.generator != old.generator && current.room == "GeneratorRoom" && current.loadState < 3) {
 			return settings["Generator"];
 		}
 
@@ -413,15 +414,15 @@ reset
 	}
 }
 
-exit
-{
-	vars.CancelSource.Cancel();
-}
+// exit
+// {
+// 	vars.CancelSource.Cancel();
+// }
 
-shutdown
-{
-	vars.CancelSource.Cancel();
-}
+// shutdown
+// {
+// 	vars.CancelSource.Cancel();
+// }
 
 // isLoading
 // {
