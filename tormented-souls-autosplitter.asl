@@ -12,8 +12,6 @@ state("TormentedSouls")
 
 startup
 {
-	settings.Add("UseIGT", true, "Use In-Game Timer value for timer");
-
 	/* Specific events */
 	settings.Add("Events", true, "Events");
 	settings.CurrentDefaultParent = "Events";
@@ -425,18 +423,17 @@ shutdown
 	vars.CancelSource.Cancel();
 }
 
+// isLoading
+// {
+// 	return vars.LoadState.Current > 2;
+// }
+
 isLoading
 {
-	if(settings["UseIGT"]) {
-		return true;
-	}else{
-		return vars.LoadState.Current > 2;
-	}
+	return true;
 }
 
 gameTime
 {
-	if(settings["UseIGT"]) {
-		return TimeSpan.FromSeconds(current.time);
-	}
+	return TimeSpan.FromSeconds(current.time);
 }
