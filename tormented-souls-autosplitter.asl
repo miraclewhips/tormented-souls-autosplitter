@@ -1,6 +1,6 @@
 state("TormentedSouls")
 {
-	float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
+	// float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
 
 	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA0;
 	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xB8;
@@ -8,7 +8,8 @@ state("TormentedSouls")
 	
 	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0x48, 0x14;
 	string255 room :  "UnityPlayer.dll", 0x19FE860, 0x48, 0x40;
-	int loadState : "UnityPlayer.dll", 0x19FE860, 0x18;
+
+	int loadState : "mono-2.0-bdwgc.dll", 0x4A7478, 0x210, 0xE38;
 }
 
 startup
@@ -17,10 +18,10 @@ startup
 	settings.Add("Events", true, "Events");
 	settings.CurrentDefaultParent = "Events";
 	
+	settings.Add("MenuCredits", true, "Complete game");
 	settings.Add("Generator", true, "Enabling/Disabling the generator");
 	settings.Add("KeyUsed", true, "Use the combination key");
 	settings.Add("Lamp", true, "Get lamp from the priest");
-	settings.Add("GameResult", true, "Complete game");
 	settings.Add("MeetingRoom-MirrorRoom_B_P", true, "Enter Blue VHS");
 	settings.Add("MirrorRoom_B_P-MeetingRoom", true, "Leave Blue VHS");
 	settings.Add("MeetingRoom-Corridor_1B_P", true, "Enter Yellow VHS");
@@ -119,7 +120,7 @@ startup
 	settings.Add("Corridor_2A", false, "West Wing Corridor");
 	settings.Add("Room_2E", false, "Room 2E");
 	settings.Add("Corridor_2B", false, "West Wing Hallway");
-	settings.Add("ObservationRoom", true, "Observation Room");
+	settings.Add("ObservationRoom", false, "Observation Room");
 	settings.Add("OperatingRoom", false, "Operating Room");
 	settings.Add("AnesthesiaRoom", true, "Anesthesia Room");
 	settings.Add("CleanRoom", false, "Disinfectant Room");
@@ -276,6 +277,7 @@ startup
 
 	settings.Add("Reception-BigHall", true, "Reception → Main Hall");
 	settings.Add("Corridor_2A-Corridor_1B", true, "West Wing Corridor → Chapel (Elevator Down)");
+	settings.Add("ObservationRoom-Corridor_2B", true, "Observation Room → West Wing Hallway");
 	settings.Add("Room_2D-Bathroom_D_M", true, "Room 2D (Mirror) → Bathroom 2C-2D (Mirror)");
 	settings.Add("Room_2D-Corridor_2E", true, "Room 2D → Intensive Care Corridor");
 
@@ -285,6 +287,7 @@ startup
 	settings.CurrentDefaultParent = "RoomDoorCat_Basement";
 
 	settings.Add("MirrorRoom_B-Morgue", true, "Experiment Room → Morgue");
+	settings.Add("Corridor_BA-BigHall", false, "Basement West → Main Hall");
 
 	/* Mausoleum */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
@@ -316,64 +319,12 @@ startup
 	settings.Add("Bunker_3C-Bunker_3A", true, "Bunker 2C → Bunker 2A");
 
 	settings.CurrentDefaultParent = null;
-
-	// vars.Dbg = (Action<dynamic>) ((output) => print("[TORMENTED SOULS] " + output));
 }
-
-// init
-// {
-// 	vars.CancelSource = new CancellationTokenSource();
-// 	vars.ScanThread = new Thread(() =>
-// 	{
-// 		// vars.Dbg("Starting scan thread.");
-
-// 		var sceneManagerTrg = new SigScanTarget(3, "48 8B 1D ???????? 0F 57 C0")
-// 		{ OnFound = (p, s, ptr) => ptr + 0x4 + p.ReadValue<int>(ptr) };
-// 		var sceneManager = IntPtr.Zero;
-
-// 		var token = vars.CancelSource.Token;
-// 		while (!token.IsCancellationRequested)
-// 		{
-// 			var unityPlayer = game.ModulesWow64Safe().FirstOrDefault(m => m.ModuleName == "UnityPlayer.dll");
-// 			if (unityPlayer == null)
-// 			{
-// 				// vars.Dbg("UnityPlayer not yet initialized.");
-// 				Thread.Sleep(2000);
-// 			}
-
-// 			var scanner = new SignatureScanner(game, unityPlayer.BaseAddress, unityPlayer.ModuleMemorySize);
-
-// 			if (sceneManager == IntPtr.Zero && (sceneManager = scanner.Scan(sceneManagerTrg)) != IntPtr.Zero)
-// 				// vars.Dbg("Found SceneManager at 0x" + sceneManager.ToString("X"));
-
-// 			if (new[] { sceneManager }.All(ptr => ptr != IntPtr.Zero))
-// 			{
-// 				vars.LoadState = new MemoryWatcher<int>(new DeepPointer(sceneManager, 0x18));
-
-// 				// vars.Dbg("Initiating watchers completed.");
-// 				break;
-// 			}
-
-// 			// vars.Dbg("One or more signatures could not be found.");
-// 			Thread.Sleep(2000);
-// 		}
-
-// 		// vars.Dbg("Exiting scan thread.");
-// 	});
-
-// 	vars.ScanThread.Start();
-// }
 
 start
 {
 	return current.room == "IntroScene";
 }
-
-// update
-// {
-// 	if (vars.ScanThread.IsAlive) return false;
-// 	vars.LoadState.Update(game);
-// }
 
 split
 {
@@ -390,7 +341,7 @@ split
 		}
 	}else{
 		/* generator toggled */
-		if(current.generator != old.generator && current.room == "GeneratorRoom" && current.loadState < 3) {
+		if(current.generator != old.generator && current.loadState != 0) {
 			return settings["Generator"];
 		}
 
@@ -400,7 +351,7 @@ split
 		}
 
 		/* lamp obtained */
-		if(current.lamp > old.lamp && current.room == "Room_2B") {
+		if(current.lamp > old.lamp) {
 			return settings["Lamp"];
 		}
 	}
@@ -414,27 +365,12 @@ reset
 	}
 }
 
-// exit
-// {
-// 	vars.CancelSource.Cancel();
-// }
-
-// shutdown
-// {
-// 	vars.CancelSource.Cancel();
-// }
-
-// isLoading
-// {
-// 	return vars.LoadState.Current > 2;
-// }
-
 isLoading
 {
-	return true;
+	return current.loadState == 0;
 }
 
-gameTime
-{
-	return TimeSpan.FromSeconds(current.time);
-}
+// gameTime
+// {
+// 	return TimeSpan.FromSeconds(current.time);
+// }

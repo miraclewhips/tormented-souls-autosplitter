@@ -8,4 +8,4 @@ There are a lot of different auto-split options to choose from in the settings:
 
 ![settings](https://i.imgur.com/Jp0Ppmn.png)
 
-The default settings are made to work with the included .lss file ([splits listed in this spreadsheet](https://docs.google.com/spreadsheets/d/1yQqTLATWy2rzE9uD2rtapApFun8kYbugSKjQQ2Q9jRA/edit?usp=sharing)).
+The default settings are made to work with the included .lss file.
