@@ -1,13 +1,12 @@
 state("TormentedSouls")
 {
-	// float time : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA4;
 
-	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xA0;
-	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0xB8;
-	byte lamp :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0x40, 0x14;
+	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0x30, 0xE0, 0x1D0, 0x1E8, 0x0, 0x10, 0xA0;
+	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0x30, 0xE0, 0x1D0, 0x1E8, 0x0, 0x10, 0xB8;
+	byte lamp :  "mono-2.0-bdwgc.dll", 0x49A358, 0x30, 0xE0, 0x1D0, 0x1E8, 0x0, 0x10, 0x40, 0x14;
 	
-	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1E8, 0x1E8, 0x0, 0x10, 0x48, 0x14;
-	string255 room :  "UnityPlayer.dll", 0x19FE860, 0x48, 0x40;
+	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0x30, 0xE0, 0x1D0, 0x1E8, 0x0, 0x10, 0x48, 0x14;
+	string255 room :  "UnityPlayer.dll", 0x1A058E0, 0x48, 0x40;
 
 	int loadState : "mono-2.0-bdwgc.dll", 0x4A7478, 0x210, 0xE38;
 }
@@ -262,6 +261,7 @@ startup
 	settings.Add("Kitchen-Corridor_1B_P", true, "Kitchen (Yellow VHS) → Chapel (Yellow VHS)");
 	settings.Add("BroomCloset-Corridor_1B_P", true, "Closet (Yellow VHS) → Chapel (Yellow VHS)");
 	settings.Add("BroomCloset-Corridor_1B", true, "Closet → Chapel");
+	settings.Add("Corridor_1A-BigHall", true, "Service Area → Main Hall");
 
 	/* Floor 2 East */
 	settings.CurrentDefaultParent = "RoomDoorSplit";
@@ -287,7 +287,6 @@ startup
 	settings.CurrentDefaultParent = "RoomDoorCat_Basement";
 
 	settings.Add("MirrorRoom_B-Morgue", true, "Experiment Room → Morgue");
-	settings.Add("Corridor_BA-BigHall", false, "Basement West → Main Hall");
 
 	/* Mausoleum */
 	settings.CurrentDefaultParent = "RoomDoorSplit";

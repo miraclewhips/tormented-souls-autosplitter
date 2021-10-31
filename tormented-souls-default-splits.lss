@@ -2,13 +2,15 @@
 <Run version="1.7.0">
   <GameIcon />
   <GameName>Tormented Souls</GameName>
-  <CategoryName>Full Game Any%</CategoryName>
+  <CategoryName>Any%</CategoryName>
   <Metadata>
     <Run id="" />
     <Platform usesEmulator="False">PC</Platform>
     <Region>
     </Region>
-    <Variables />
+    <Variables>
+      <Variable name="Subcategory">PC</Variable>
+    </Variables>
   </Metadata>
   <Offset>00:00:00</Offset>
   <AttemptCount>0</AttemptCount>
@@ -105,7 +107,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Elevator Puzzle (unlock main hall gate)</Name>
+      <Name>Elevator Cart (unlock main hall gate)</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -114,7 +116,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Take Bolt From Fuse Box</Name>
+      <Name>Service Area Shotgun</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -123,7 +125,16 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Get Shotgun Piece</Name>
+      <Name>Get Bolt from Reception</Name>
+      <Icon />
+      <SplitTimes>
+        <SplitTime name="Personal Best" />
+      </SplitTimes>
+      <BestSegmentTime />
+      <SegmentHistory />
+    </Segment>
+    <Segment>
+      <Name>Observation Shotgun</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -141,7 +152,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Shotgun / Cut The Rope</Name>
+      <Name>Disable Generator</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
@@ -150,7 +161,7 @@
       <SegmentHistory />
     </Segment>
     <Segment>
-      <Name>Disable Generator</Name>
+      <Name>Cut The Rope</Name>
       <Icon />
       <SplitTimes>
         <SplitTime name="Personal Best" />
