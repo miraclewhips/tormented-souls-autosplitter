@@ -6,6 +6,6 @@ If it's not showing the correct time for you, make sure to right click LiveSplit
 
 There are a lot of different auto-split options to choose from in the settings:
 
-![settings](https://i.imgur.com/Jp0Ppmn.png)
+![settings](https://i.imgur.com/tD2DeQS.png)
 
 The default settings are made to work with the included .lss file.
