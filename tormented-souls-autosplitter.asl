@@ -348,7 +348,7 @@ start
 split
 {
 	/* split doors */
-	if(current.room != old.room && current.room != null) {
+	if(current.room != old.room && current.room != null && current.room != "LoadMidScene") {
 		/* split if the room is enabled or doorsplit is enabled */
 		if(settings["DoorSplit"] || settings[current.room]) {
 			return true;
