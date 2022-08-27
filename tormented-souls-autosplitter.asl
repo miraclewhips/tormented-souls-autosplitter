@@ -1,38 +1,48 @@
-state("TormentedSouls")
+state("TormentedSouls", "v0.89.0")
 {
-	/* v0.77.3 pointers */
-	byte v77_generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0xA0;
-	int v77_keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0xB8;
-	byte v77_lamp :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0x40, 0x14;
-	string255 v77_lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0x48, 0x14;
+	byte generator :  "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0xA0;
+	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0xB8;
+	byte lamp :  "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0x40, 0x14;
+	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0x48, 0x14;
+	int loadState : "UnityPlayer.dll", 0x1A37120, 0x128, 0x80, 0x78;
+	string255 room :  "UnityPlayer.dll", 0x1A37120, 0x48, 0x40;
+}
 
-	int v77_loadState : "mono-2.0-bdwgc.dll", 0x4A7478, 0x210, 0xE38;
+// state("TormentedSouls", "v0.88.4")
+// {
+// 	byte generator :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0xA0;
+// 	int keyUsed :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0xB8;
+// 	byte lamp :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0x40, 0x14;
+// 	string255 lastDoor : "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0x48, 0x14;
+// 	int loadState : "UnityPlayer.dll", 0x1A058E0, 0x128, 0x80, 0x78;
+// 	string255 room :  "UnityPlayer.dll", 0x1A058E0, 0x48, 0x40;
+// }
 
-	/* v0.88.4 pointers */
-	byte v88_generator :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0xA0;
-	int v88_keyUsed :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0xB8;
-	byte v88_lamp :  "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0x40, 0x14;
-	string255 v88_lastDoor : "UnityPlayer.dll", 0x019C0FD8, 0x6C0, 0x4E0, 0x318, 0x1A8, 0x2E0, 0x0, 0x10, 0x48, 0x14;
-
-	int v88_loadState : "UnityPlayer.dll", 0x1A058E0, 0x128, 0x80, 0x78;
-
-	/* unity scene pointers */
+state("TormentedSouls", "v0.77.3")
+{
+	byte generator :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0xA0;
+	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0xB8;
+	byte lamp :  "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0x40, 0x14;
+	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49A358, 0xF8, 0xA0, 0x1D0, 0x1E8, 0x0, 0x10, 0x48, 0x14;
+	int loadState : "mono-2.0-bdwgc.dll", 0x4A7478, 0x210, 0xE38;
 	string255 room :  "UnityPlayer.dll", 0x1A058E0, 0x48, 0x40;
+}
+
+init
+{
+	switch(modules.First().FileVersionInfo.ProductVersion.ToString()) {
+		case "2020.3.36.7469419":
+			version = "v0.89.0";
+			break;
+
+		case "2020.3.16.302446":
+			version = "v0.77.3";
+			break;
+	}
 }
 
 startup
 {
-	/* VERSION SELECT */
-	settings.Add("Version", true, "GAME VERSION (ONLY SELECT ONE OPTION)");
-	settings.CurrentDefaultParent = "Version";
-	
-	settings.Add("Version77", false, "v0.77.3");
-	settings.Add("Version88", true, "v0.88.4");
-	
-	settings.CurrentDefaultParent = null;
-
-
-
 	/* Specific events */
 	settings.Add("Events", true, "Events");
 	settings.CurrentDefaultParent = "Events";
@@ -355,47 +365,23 @@ split
 		}
 
 		/* split if specific doors are enabled */
-		if(settings["Version77"]) {
-			if(settings[current.v77_lastDoor + "-" + current.room]) {
-				return true;
-			}
-		}else{
-			if(settings[current.v88_lastDoor + "-" + current.room]) {
-				return true;
-			}
+		if(settings[current.lastDoor + "-" + current.room]) {
+			return true;
 		}
 	}else{
 		/* generator toggled */
-		if(settings["Version77"]) {
-			if(current.v77_generator != old.v77_generator && current.v77_loadState != 0) {
-				return settings["Generator"];
-			}
-		}else{
-			if(current.v88_generator != old.v88_generator && current.v88_loadState != 0) {
-				return settings["Generator"];
-			}
+		if(current.generator != old.generator && current.loadState != 0) {
+			return settings["Generator"];
 		}
 
 		/* key used */
-		if(settings["Version77"]) {
-			if(current.v77_keyUsed > old.v77_keyUsed) {
-				return settings["KeyUsed"];
-			}
-		}else{
-			if(current.v88_keyUsed > old.v88_keyUsed) {
-				return settings["KeyUsed"];
-			}
+		if(current.keyUsed > old.keyUsed) {
+			return settings["KeyUsed"];
 		}
 
 		/* lamp obtained */
-		if(settings["Version77"]) {
-			if(current.v77_lamp > old.v77_lamp) {
-				return settings["Lamp"];
-			}
-		}else{
-			if(current.v88_lamp > old.v88_lamp) {
-				return settings["Lamp"];
-			}
+		if(current.lamp > old.lamp) {
+			return settings["Lamp"];
 		}
 	}
 }
@@ -410,9 +396,5 @@ reset
 
 isLoading
 {
-	if(settings["Version77"]) {
-		return current.v77_loadState == 0;
-	}else{
-		return current.v88_loadState == 0;
-	}
+	return current.loadState == 0;
 }
