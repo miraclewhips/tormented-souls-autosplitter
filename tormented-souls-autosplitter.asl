@@ -4,7 +4,7 @@ state("TormentedSouls", "v0.89.0")
 	int keyUsed :  "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0xB8;
 	byte lamp :  "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0x40, 0x14;
 	string255 lastDoor : "mono-2.0-bdwgc.dll", 0x49AC78, 0x340, 0x0, 0x3C0, 0x40, 0x10, 0x48, 0x14;
-	int loadState : "UnityPlayer.dll", 0x1A37120, 0x128, 0x80, 0x78;
+	int loadState : "mono-2.0-bdwgc.dll", 0x496A90, 0xEB8, 0x50, 0xFE8;
 	string255 room :  "UnityPlayer.dll", 0x1A37120, 0x48, 0x40;
 }
 
@@ -47,7 +47,7 @@ startup
 	settings.Add("Events", true, "Events");
 	settings.CurrentDefaultParent = "Events";
 	
-	settings.Add("MenuCredits", true, "Complete game");
+	settings.Add("MeetingRoom-", true, "Complete game");
 	settings.Add("Generator", true, "Enabling/Disabling the generator");
 	settings.Add("KeyUsed", true, "Use the combination key");
 	settings.Add("Lamp", true, "Get lamp from the priest");
